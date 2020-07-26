@@ -4,7 +4,7 @@ import Layout from "../app/features/layout/Layout";
 import Link from "next/link";
 import NavbarComponent from "../app/common/navbar";
 import Modal from "react-modal";
-import { useRouter, Router } from "next/router";
+import { useRouter } from "next/router";
 import Rates from "../app/features/rates/rates";
 
 Modal.setAppElement("#__next");

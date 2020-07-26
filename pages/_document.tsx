@@ -6,7 +6,7 @@ import Document, {
 } from "next/document";
 import { AppRegistry } from "react-native";
 import config from "../app.json";
-import { ServerStyleSheet } from "styled-components";
+import React from "react";
 
 // Force Next-generated DOM elements to fill their parent's height
 const normalizeNextElements = `
@@ -23,35 +23,14 @@ export default class MyDocument extends Document {
 
     // @ts-ignore: react-native-web method
     const { getStyleElement } = AppRegistry.getApplication(config.name);
-    const stylesRN = [
+    const page = ctx.renderPage();
+
+    const styles = [
       <style dangerouslySetInnerHTML={{ __html: normalizeNextElements }} />,
       getStyleElement(),
     ];
 
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
-
-    try {
-      ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
-        });
-
-      const initialProps = await Document.getInitialProps(ctx);
-      return {
-        ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-            {stylesRN}
-          </>
-        ),
-      };
-    } finally {
-      sheet.seal();
-    }
+    return { ...page, styles: React.Children.toArray(styles) };
   }
 
   render() {
