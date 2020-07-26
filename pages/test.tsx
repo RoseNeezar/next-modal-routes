@@ -13,16 +13,15 @@ interface IStyle {
   ishover?: boolean;
 }
 const LayoutIndex = styled.View`
-  background-color: ${({ theme }) => theme.delete};
+  background-color: ${({ theme }) => theme.primary};
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: auto;
 `;
 
 const Text = styled.Text`
-  font-size: 2.6rem;
+  font-size: 1.6rem;
   background-color: ${(props: IStyle) => (props.ishover ? "purple" : "#39f")};
   cursor: pointer;
   color: ${({ theme }) => theme.primary};
@@ -30,7 +29,7 @@ const Text = styled.Text`
 
 const currencies = ["CAD", "USD", "GBP", "MXN", "AUD", "EUR", "NOK"];
 
-const index = () => {
+const Test = () => {
   const router = useRouter();
   return (
     <Layout>
@@ -44,7 +43,7 @@ const index = () => {
       <LayoutIndex>
         <ul>
           {currencies.map((res, index) => (
-            <li style={{ marginTop: "40rem" }} key={index}>
+            <li style={{ marginTop: "2rem" }} key={index}>
               <Link
                 href={`?currencyCode=${res}`}
                 as={`/currency/${res}`}
@@ -59,4 +58,4 @@ const index = () => {
     </Layout>
   );
 };
-export default observer(index);
+export default observer(Test);
