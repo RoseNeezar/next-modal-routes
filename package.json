@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p 5000"
   },
   "dependencies": {
     "mobx": "^5.15.4",
